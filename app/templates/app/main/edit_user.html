@@ -1,0 +1,152 @@
+{% extends 'app/main/base1.html' %}
+{% load static %}
+{% block content %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Edit User</h1>
+
+    </div>
+    <hr>
+
+
+    <div class="container-fluid">
+        {% if msg %}
+
+        <p style="color: green;">{{msg}}</p>
+
+        {% endif %}
+
+        {% if key1 %}
+        <form action="{% url 'superedit' pk=key1.id %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+
+            <div class=" box_general padding_bottom">
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>User FirstName</label>
+                            <input type="text" class="form-control" name="u_fname" value="{{key1.Firstname}}">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>User LastName</label>
+                            <input type="text" class="form-control" name='u_lname' value="{{key1.Lastname}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>User Email</label>
+                            <input type="email" class="form-control" name="u_email" value="{{key1.m_id.Email}}">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>User Password</label>
+                            <input type="password" class="form-control" name='u_password'
+                                value="{{key1.m_id.Password}}">
+                        </div>
+                    </div>
+                </div>
+                <!-- /row-->
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Role</label>
+                            <select class="form-control" id="role" name="u_role">
+                                {% if key1.Role == "Admin" %}
+                                <option>{{key1.Role}}</option>
+                                <option>Security</option>
+                                {% else %}
+                                <option>{{key1.Role}}</option>
+                                <option>Admin</option>
+                                {% endif %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Allow Create</label>
+                            <select class="form-control" id="allow_create" name="allow_create">
+                                {% if key1.allow_create == True %}
+                                <option>{{key1.allow_create}}</option>
+                                <option>False</option>
+                                {% else %}
+                                <option>{{key1.allow_create}}</option>
+                                <option>True</option>
+                                {% endif %}
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Allow Delete</label>
+                            <select class="form-control" id="allow_delete" name="allow_delete">
+                                {% if key1.allow_delete == True %}
+                                <option>{{key1.allow_delete}}</option>
+                                <option>False</option>
+                                {% else %}
+                                <option>{{key1.allow_delete}}</option>
+                                <option>True</option>
+                                {% endif %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Allow Edit</label>
+                            <select class="form-control" id="allow_edit" name="allow_edit">
+                                {% if key1.allow_edit == True %}
+                                <option>{{key1.allow_edit}}</option>
+                                <option>False</option>
+                                {% else %}
+                                <option>{{key1.allow_edit}}</option>
+                                <option>True</option>
+                                {% endif %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!-- /row-->
+
+            </div>
+            <!-- /box_general-->
+
+
+
+            <p style="text-align: center;">
+                <input class="btn btn-success" type="submit" value="Save"> &nbsp; &nbsp;
+                <input class="btn btn-warning" type="reset" value="Reset">
+                <br> <br>
+                <a class="btn_1 medium" href="{% url 'superuserlist' %}"><i class="fa fa-chevron-circle-left"
+                        aria-hidden="true"></i> Back to User Lists</a>
+            </p>
+
+
+        </form>
+        {% endif %}
+
+
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+
+</div>
+<!-- End of Main Content -->
+
+{% endblock %}

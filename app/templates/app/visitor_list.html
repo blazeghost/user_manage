@@ -1,0 +1,142 @@
+{% extends 'app/base1.html' %}
+{% load static %}
+{% block content %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Visitor List</h1>
+    <hr>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Visitor</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                {% if request.session.Role == 'Admin' %}
+
+
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Purpose</th>
+                            <th>Concerned Person</th>
+                            <th>DateTime</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Name</th>
+                            <th>Purpose</th>
+                            <th>Concerned Person</th>
+                            <th>DateTime</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for i in key1 %}
+
+                        <tr>
+                            <td>{{i.visitor_name}}</td>
+                            <td>{{i.visitor_purpose}}</td>
+                            <td>{{i.concerned_person}}</td>
+                            <td>{{i.date_time}}</td>
+                            <td>
+                                {% if request.session.allow_edit == True %}
+                                <form action="{% url 'admineditpage' pk=i.id %}">
+                                    <input class="btn btn-primary" type="submit" value="Edit">
+                                </form>
+                                {% else %}
+                                <input class="btn btn-primary" type="submit" value="Disabled">
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if request.session.allow_delete == True %}
+                                <form action="{% url 'admindelete' pk=i.id %}" onsubmit="doc_delete()">
+                                    <input class="btn btn-danger" type="submit" value="Delete">
+                                </form>
+                                {% else %}
+                                <input class="btn btn-danger" type="submit" value="Delete" disabled>
+                                {% endif %}
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+
+                {% elif request.session.Role == 'Security' %}
+
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Purpose</th>
+                            <th>Concerned Person</th>
+                            <th>DateTime</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Name</th>
+                            <th>Purpose</th>
+                            <th>Concerned Person</th>
+                            <th>DateTime</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for i in key2 %}
+
+                        <tr>
+                            <td>{{i.tableone_id.visitor_name}}</td>
+                            <td>{{i.tableone_id.visitor_purpose}}</td>
+                            <td>{{i.tableone_id.concerned_person}}</td>
+                            <td>{{i.tableone_id.date_time}}</td>
+                            <td>
+                                {% if request.session.allow_edit == True %}
+                                <form action="{% url 'securityeditpage' pk=i.tableone_id.id %}">
+                                    <input class="btn btn-primary" type="submit" value="Edit">
+                                </form>
+                                {% else %}
+                                <input class="btn btn-primary" type="submit" value="Edit" disabled>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if request.session.allow_delete == True %}
+                                <form action="{% url 'securitydelete' pk=i.tableone_id.id %}" onsubmit="doc_delete()">
+                                    <input class="btn btn-danger" type="submit" value="Delete">
+                                </form>
+                                {% else %}
+                                <input class="btn btn-danger" type="submit" value="Delete" disabled>
+                                {% endif %}
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+
+</div>
+<!-- End of Main Content -->
+
+{% endblock %}

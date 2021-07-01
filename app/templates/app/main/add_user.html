@@ -1,0 +1,133 @@
+{% extends 'app/main/base1.html' %}
+{% load static %}
+{% block content %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Add User</h1>
+
+    </div>
+    <hr>
+
+
+    <div class="container-fluid">
+        {% if msg %}
+
+        <p style="color: green;">{{msg}}</p>
+
+        {% endif %}
+
+
+        <form action="{% url 'superadduser' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+
+            <div class=" box_general padding_bottom">
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>User FirstName</label>
+                            <input type="text" class="form-control" name="u_fname" value="">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>User LastName</label>
+                            <input type="text" class="form-control" name='u_lname' value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>User Email</label>
+                            <input type="text" class="form-control" name="u_email" value="">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>User Password</label>
+                            <input type="password" class="form-control" name='u_password' value="">
+                        </div>
+                    </div>
+                </div>
+                <!-- /row-->
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Role</label>
+                            <select class="form-control" id="role" name="u_role">
+                                <option value="select" disabled selected>---Role---</option>
+                                <option>Admin</option>
+                                <option>Security</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Allow Create</label>
+                            <select class="form-control" id="allow_create" name="allow_create">
+                                <option value="select" disabled selected>---SELECT---</option>
+                                <option>True</option>
+                                <option>False</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Allow Delete</label>
+                            <select class="form-control" id="allow_delete" name="allow_delete">
+                                <option value="select" disabled selected>---SELECT---</option>
+                                <option>True</option>
+                                <option>False</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Allow Edit</label>
+                            <select class="form-control" id="allow_edit" name="allow_edit">
+                                <option value="select" readonly>---SELECT---</option>
+                                <option>True</option>
+                                <option>False</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!-- /row-->
+
+            </div>
+            <!-- /box_general-->
+
+
+
+            <p style="text-align: center;">
+                <input class="btn btn-success" type="submit" value="Create"> &nbsp; &nbsp;
+                <input class="btn btn-warning" type="reset" value="Reset">
+                <br> <br>
+                <a class="btn_1 medium" href="{% url 'superindex' %}"><i class="fa fa-chevron-circle-left"
+                        aria-hidden="true"></i> Back to Dashboard</a>
+            </p>
+
+        </form>
+
+
+
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+
+</div>
+<!-- End of Main Content -->
+
+{% endblock %}
